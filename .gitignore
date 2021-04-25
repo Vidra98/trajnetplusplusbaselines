@@ -19,7 +19,7 @@ evaluator/old_table/
 evaluator/nll.py
 	
 *.txt
-*.png
+
 *.sh
 *.run
 *.pt
