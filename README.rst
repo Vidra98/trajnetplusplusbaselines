@@ -93,7 +93,7 @@ Results
 +--------+-------+
 | test   | dkdkd |
 +--------+-------+
-|rjrjrjr   |      |
+|rjrjrjr |       |
 +--------+-------+
 
 Unimodal Comparison of interaction encoder designs on interacting trajectories of TrajNet++ real world dataset. Errors reported are ADE / FDE in meters, collisions in mean % (std. dev. %) across 5 independent runs. Our goal is to reduce collisions in model predictions without compromising distance-based metrics.
@@ -103,15 +103,17 @@ Unimodal Comparison of interaction encoder designs on interacting trajectories o
 +-----------------------------------+-------------+------------+ 
 | LSTM             		     |  0.60/1.30  | 13.6 (0.2) | 
 +-----------------------------------+-------------+------------+ 
-| S-LSTM         	             |  0.53/1.14  |  6.7 (0.2) |  
+| S-LSTM			     |  0.53/1.14  |  6.7 (0.2) |  
 +-----------------------------------+-------------+------------+ 
-| S-Attn          		     |  0.56/1.21  |  9.0 (0.3) |  
+| S-Attn       		     |  0.56/1.21  |  9.0 (0.3) |  
 +-----------------------------------+-------------+------------+ 
-| S-GAN             		     |  0.64/1.40  |  6.9 (0.5) |   
+| S-GAN            		     |  0.64/1.40  |  6.9 (0.5) |   
 +-----------------------------------+-------------+------------+ 
-| D-LSTM (ours)       		     |  0.56/1.22  |  5.4(0.3)  | 
+| D-LSTM (ours)      		     |  0.56/1.22  |  5.4 (0.3) | 
 +-----------------------------------+-------------+------------+ 
-| D-LSTM (milestone 1)              |  0.65/1.41  |  5.9       |
+
++-----------------------------------+-------------+------------+ 
+| D-LSTM (milestone 1)	             |  0.65/1.41  |  5.9       |
 +-----------------------------------+-------------+------------+
 | D-LSTM (milestone 2 single 1)     |  0.51/1.12  |  4.01      |
 +-----------------------------------+-------------+------------+
