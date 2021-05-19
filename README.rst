@@ -90,6 +90,10 @@ Evaluation on datasplits is based on the following `categorization <https://gith
 Results
 -------
 
++--------+-------+
+| test   | dkdkd |
++--------+-------+
+
 Unimodal Comparison of interaction encoder designs on interacting trajectories of TrajNet++ real world dataset. Errors reported are ADE / FDE in meters, collisions in mean % (std. dev. %) across 5 independent runs. Our goal is to reduce collisions in model predictions without compromising distance-based metrics.
 
 +-----------------------------------+-------------+-----------+ 
