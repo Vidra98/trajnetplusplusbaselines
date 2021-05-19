@@ -5,10 +5,14 @@ PyTorch implementation of `Human Trajectory Forecasting in Crowds: A Deep Learni
 
 We obtain this result with the default lstm training on five_synth_data :
 
-.. figure:: docs/five_synth_result/synth_data.png
-.. figure:: docs/five_synth_result/synth_data2.png
-.. figure:: docs/five_synth_result/synth_data3.png
-.. figure:: docs/five_synth_result/synth_result.png
+.. figure:: docs/real_data_results/real_data1.png
+.. figure:: docs/real_data_results/real_data2.png
+.. figure:: docs/real_data_results/real_data3.png
+
+.. figure:: docs/synth_data_results/synth_data1.png
+.. figure:: docs/synth_data_results/synth_data2.png
+.. figure:: docs/synth_data_results/synth_data3.png
+
 
 .. figure:: docs/train/cover.png
 
@@ -88,20 +92,32 @@ Results
 
 Unimodal Comparison of interaction encoder designs on interacting trajectories of TrajNet++ real world dataset. Errors reported are ADE / FDE in meters, collisions in mean % (std. dev. %) across 5 independent runs. Our goal is to reduce collisions in model predictions without compromising distance-based metrics.
 
-+----------------+------------+-------------------+ 
-| Method         |   ADE/FDE  | Collisions        | 
-+----------------+------------+-------------------+ 
-| LSTM           |  0.60/1.30 | 13.6 (0.2)        | 
-+----------------+------------+-------------------+ 
-| S-LSTM         |  0.53/1.14 |  6.7 (0.2)        |  
-+----------------+------------+-------------------+ 
-| S-Attn         |  0.56/1.21 |  9.0 (0.3)        |  
-+----------------+------------+-------------------+ 
-| S-GAN          |  0.64/1.40 |  6.9 (0.5)        |   
-+----------------+------------+-------------------+ 
-| D-LSTM (ours)  |  0.56/1.22 |  **5.4** **(0.3)**| 
-+----------------+------------+-------------------+ 
++----------------------+------------+-------------------+ 
+| Method               |   ADE/FDE  | Collisions        | 
++----------------------+------------+-------------------+ 
+| LSTM                 |  0.60/1.30 | 13.6 (0.2)        | 
++----------------------+------------+-------------------+ 
+| S-LSTM               |  0.53/1.14 |  6.7 (0.2)        |  
++----------------------+------------+-------------------+ 
+| S-Attn               |  0.56/1.21 |  9.0 (0.3)        |  
++----------------------+------------+-------------------+ 
+| S-GAN                |  0.64/1.40 |  6.9 (0.5)        |   
++----------------------+------------+-------------------+ 
+| D-LSTM (ours)        |  0.56/1.22 |  **5.4** **(0.3)**| 
++----------------------+------------+-------------------+ 
+| D-LSTM (milestone 1) |  0.65/1.41 |  5.9              |
++----------------------+------------+-------------------+
+| D-LSTM (milestone 2 single 1)  |  0.51/1.12  |  4.01     |
++--------------------------------+-------------+-----------+
+| D-LSTM (milestone 2 single 2)  |  0.51/1.09  |  4.01     |
++--------------------------------+-------------+-----------+
+| D-LSTM (milestone 2 multi)     |  0.51/1.12  |  3.62     |
++--------------------------------+-------------+-----------+
 
+milestone 1 link: https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/132467
+milestone 2 link (single 1): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/137789 (version 1)
+milestone 2 link (single 2): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138913 (version 2)
+milestone 2 link (multi): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138597
 
 Interpreting Forecasting Models
 ===============================
