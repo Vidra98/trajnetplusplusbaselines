@@ -3,31 +3,27 @@ TrajNet++ : The Trajectory Forecasting Framework
 
 PyTorch implementation of `Human Trajectory Forecasting in Crowds: A Deep Learning Perspective <https://arxiv.org/pdf/2007.03639.pdf>`_ 
 
-We obtain this result with the default lstm training on five_synth_data :
-
-.. figure:: docs/real_data_results/real_data1.png
-.. figure:: docs/real_data_results/real_data2.png
-.. figure:: docs/real_data_results/real_data3.png
-
-.. figure:: docs/synth_data_results/synth_data1.png
-.. figure:: docs/synth_data_results/synth_data2.png
-.. figure:: docs/synth_data_results/synth_data3.png
-
+TrajNet++ is a large scale interaction-centric trajectory forecasting benchmark comprising explicit agent-agent scenarios. Our framework provides proper indexing of trajectories by defining a hierarchy of trajectory categorization. In addition, we provide an extensive evaluation system to test the gathered methods for a fair comparison. In our evaluation, we go beyond the standard distance-based metrics and introduce novel metrics that measure the capability of a model to emulate pedestrian behavior in crowds. Finally, we provide code implementations of > 10 popular human trajectory forecasting baselines.
 
 .. figure:: docs/train/cover.png
 
-TrajNet++ is a large scale interaction-centric trajectory forecasting benchmark comprising explicit agent-agent scenarios. Our framework provides proper indexing of trajectories by defining a hierarchy of trajectory categorization. In addition, we provide an extensive evaluation system to test the gathered methods for a fair comparison. In our evaluation, we go beyond the standard distance-based metrics and introduce novel metrics that measure the capability of a model to emulate pedestrian behavior in crowds. Finally, we provide code implementations of > 10 popular human trajectory forecasting baselines.
+Result on Real data
+-------------------
 
+.. figure:: docs/real_data_results/real_data_SGAN.png
+.. figure:: docs/real_data_results/real_data_SGAN1.png
+.. figure:: docs/real_data_results/VAE.png
+
+Result on synth data
+--------------------
+
+.. figure:: docs/synth_data_results/synth_SGAN.png
+.. figure:: docs/synth_data_results/synth_SGAN1.png
 
 Data Setup
 ==========
 
 The detailed step-by-step procedure for setting up the TrajNet++ framework can be found `here <https://thedebugger811.github.io/posts/2020/03/intro_trajnetpp/>`_
-
-Converting External Datasets
-----------------------------
-
-To convert external datasets into the TrajNet++ framework, refer to this `guide <https://thedebugger811.github.io/posts/2020/10/data_conversion/>`_ 
 
 Training Models
 ===============
@@ -50,8 +46,8 @@ The training script and its help menu:
 
 
 
-GAN
----
+SGAN
+----
 
 The training script and its help menu:
 ``python -m trajnetbaselines.sgan.trainer --help``
@@ -104,7 +100,7 @@ Unimodal Comparison of interaction encoder designs on interacting trajectories o
 +-----------------------------------+-------------+------------+ 
 | S-GAN                             |  0.64/1.40  |  6.9 (0.5) |   
 +-----------------------------------+-------------+------------+ 
-| D-LSTM (ours)                     |  0.56/1.22  |  5.4 (0.3) | 
+| D-LSTM (ours)                     |  0.56/1.22  |  5.4 (0.3) |
 +-----------------------------------+-------------+------------+ 
 | D-LSTM (milestone 1)              |  0.65/1.41  |  5.9       |
 +-----------------------------------+-------------+------------+
@@ -114,11 +110,34 @@ Unimodal Comparison of interaction encoder designs on interacting trajectories o
 +-----------------------------------+-------------+------------+
 | D-LSTM (milestone 2 multi)        |  0.51/1.12  |  3.62      |
 +-----------------------------------+-------------+------------+
+| SGAN vanilla                      |  0.64/1.37  |  8.96      |
++-----------------------------------+-------------+------------+
+| SGAN directionnal                 |  0.52/1.12  |  4.23      |
++-----------------------------------+-------------+------------+
+| SGAN social directional           |  0.53/1.11  |  3.75      |
++-----------------------------------+-------------+------------+
+| SGAN attention                    |  0.52/1.12  |  4.51      |
++-----------------------------------+-------------+------------+
+| SGAN attention fast               |  0.53/1.15  |  6.26      |
++-----------------------------------+-------------+------------+
+| fully trained VAE                 |  2.25/4.62  |  12.91     |
++-----------------------------------+-------------+------------+
 
-milestone 1 link: https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/132467
-milestone 2 link (single 1): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/137789 (version 1)
-milestone 2 link (single 2): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138913 (version 2)
-milestone 2 link (multi): https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138597
+Results discussion
+------------------
+
+For SGAN, we decided to compare different pooling method. From milestone 2, we observed that social pooling achieved better result in general. Also, attention pooling is used in many papers and seems relevant here so it catches our attention. 
+
+From the result we saw that social directional achieved the best result in general but unfortunately the result are biased since it had more epochs to trained.
+
+milestone 1 link: 
+https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/132467
+milestone 2 link (single 1): 
+https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/137789 (version 1)
+milestone 2 link (single 2): 
+https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138913 (version 2)
+milestone 2 link (multi): 
+https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138597
 
 Interpreting Forecasting Models
 ===============================

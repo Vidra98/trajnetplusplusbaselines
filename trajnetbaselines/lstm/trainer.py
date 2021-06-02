@@ -25,7 +25,7 @@ from .. import __version__ as VERSION
 
 from .utils import center_scene, random_rotation
 from .data_load_utils import prepare_data
-from .contrastive import SocialNCE, ProjHead, EventEncoder, SpatialEncoder
+from .contrastive_1 import SocialNCE, ProjHead, EventEncoder, SpatialEncoder
 
 class Trainer(object):
     def __init__(self, projection_head=None, encoder_sample=None, 
