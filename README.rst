@@ -5,25 +5,24 @@ PyTorch implementation of `Human Trajectory Forecasting in Crowds: A Deep Learni
 
 TrajNet++ is a large scale interaction-centric trajectory forecasting benchmark comprising explicit agent-agent scenarios. Our framework provides proper indexing of trajectories by defining a hierarchy of trajectory categorization. In addition, we provide an extensive evaluation system to test the gathered methods for a fair comparison. In our evaluation, we go beyond the standard distance-based metrics and introduce novel metrics that measure the capability of a model to emulate pedestrian behavior in crowds. Finally, we provide code implementations of > 10 popular human trajectory forecasting baselines.
 
+In our project, we'll be trying a few implementation and compare it to some baselines of our choice, below are some prediction that we achieved ! 
+
 .. figure:: docs/train/cover.png
 
 Result on Real data
 -------------------
 
 .. figure:: docs/real_data_results/real_data_SGAN.png
-.. figure:: docs/real_data_results/real_data_SGAN1.png
+.. figure:: docs/real_data_results/motion_attention_mlp.png
 .. figure:: docs/real_data_results/VAE.png
 
 Result on synth data
 --------------------
 
 .. figure:: docs/synth_data_results/synth_SGAN.png
-.. figure:: docs/synth_data_results/synth_SGAN1.png
+.. figure:: docs/synth_data_results/motion_attention_mlp.png
 
-Data Setup
-==========
 
-The detailed step-by-step procedure for setting up the TrajNet++ framework can be found `here <https://thedebugger811.github.io/posts/2020/03/intro_trajnetpp/>`_
 
 Training Models
 ===============
@@ -31,36 +30,20 @@ Training Models
 LSTM
 ----
 
-The training script and its help menu:
-``python -m trajnetbaselines.lstm.trainer --help``
-
-**Run Example**
-
-.. code-block::
-
-   ## Our Proposed D-LSTM
-   python -m trajnetbaselines.lstm.trainer --type directional --augment
-
-   ## Social LSTM 
-   python -m trajnetbaselines.lstm.trainer --type social --augment --n 16 --embedding_arch two_layer --layer_dims 1024
-
+For LSTM, we implemented social loss which consist of adding 
 
 
 SGAN
 ----
 
-The training script and its help menu:
-``python -m trajnetbaselines.sgan.trainer --help``
+For SGAN, we decided to compare different pooling method. From milestone 2, we observed that social pooling achieved better result in general. Also, attention pooling is used in many papers and seems relevant here so it catches our attention. 
 
-**Run Example**
+From the result we saw that social directional achieved the best result in general but unfortunately the result are biased since it had more epochs to trained.
 
-.. code-block::
 
-   ## Social GAN (L2 Loss + Adversarial Loss)
-   python -m trajnetbaselines.sgan.trainer --type directional --augment
-   
-   ## Social GAN (Variety Loss only)
-   python -m trajnetbaselines.sgan.trainer --type directional --augment --d_steps 0 --k 3
+Motion attention mlp
+--------------------
+
 
 
 Evaluation
@@ -91,15 +74,7 @@ Unimodal Comparison of interaction encoder designs on interacting trajectories o
 
 +-----------------------------------+-------------+------------+ 
 | Method                            |   ADE/FDE   | Collisions | 
-+-----------------------------------+-------------+------------+ 
-| LSTM                              |  0.60/1.30  | 13.6 (0.2) | 
-+-----------------------------------+-------------+------------+ 
-| S-LSTM                            |  0.53/1.14  |  6.7 (0.2) |  
-+-----------------------------------+-------------+------------+ 
-| S-Attn                            |  0.56/1.21  |  9.0 (0.3) |  
-+-----------------------------------+-------------+------------+ 
-| S-GAN                             |  0.64/1.40  |  6.9 (0.5) |   
-+-----------------------------------+-------------+------------+ 
++-----------------------------------+-------------+------------+   
 | D-LSTM (ours)                     |  0.56/1.22  |  5.4 (0.3) |
 +-----------------------------------+-------------+------------+ 
 | D-LSTM (milestone 1)              |  0.65/1.41  |  5.9       |
@@ -122,13 +97,13 @@ Unimodal Comparison of interaction encoder designs on interacting trajectories o
 +-----------------------------------+-------------+------------+
 | fully trained VAE                 |  2.25/4.62  |  12.91     |
 +-----------------------------------+-------------+------------+
+| Motion att MLP (6 epochs)         |  0.87/1.53  |  9.31      |
++-----------------------------------+-------------+------------+
 
 Results discussion
-------------------
+------------------ 
 
-For SGAN, we decided to compare different pooling method. From milestone 2, we observed that social pooling achieved better result in general. Also, attention pooling is used in many papers and seems relevant here so it catches our attention. 
-
-From the result we saw that social directional achieved the best result in general but unfortunately the result are biased since it had more epochs to trained.
+We estimate that our best result is 
 
 milestone 1 link: 
 https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/132467
