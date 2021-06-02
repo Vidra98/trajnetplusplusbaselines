@@ -38,33 +38,21 @@ SGAN
 
 For SGAN, we decided to compare different pooling method. From milestone 2, we observed that social pooling achieved better result in general. Also, attention pooling is used in many papers and seems relevant here so it catches our attention. 
 
-From the result we saw that social directional achieved the best result in general but unfortunately the result are biased since it had more epochs to trained.
+From the result we saw that social directional achieved the best result in general but unfortunately the result are biased since it was trained on more epochs. The results are in table below :
 
 
 Motion attention mlp
 --------------------
 
+Firstly, inspired by the contrastive learning implemented in milestone 2, we managed to introduce the Social NCE loss to the Social-GAN framework. Concretely, in order to compute the variety loss, first for each of the top K loss we also use a projection head to map the motion features, which is extracted by the LSTM generator, to the embedding space. Then we conduct multi-agent contrastive sampling to get positive and negative samples respectively, and compute the Social NCE loss which is added to the task loss finally. Therefore the variety loss is able to choose the best one not only from multi-modality but also from self-supervised data.
 
+Secondly, inspired by neuron science, the attention mechanism is introduced to deep learning and achieve excellent performance in capturing the motion. Therefore, based on the Attention MLP Pooling proposed in S-BiGAT which obtains the interaction vector by attention-weighting the embeddings of relative coordinates and hidden-state of all neighbours, we proposed a new interaction pooling model to better describe the motions occur in a scenes. We names it Motion Attention MLP Pooling, which attention-weights the embedding of relative positions, relative velocities, relative accelerations as well as hidden-state of all neighbours. 
 
-Evaluation
-==========
+As for the implementation, we include three continuous frame observations (obs0, obs1, obs2) to fully learn the motion. For example, obs2 is used to describe the position, (obs2 - obs1) is for velocity, and (obs2 - obs1) - (obs1 - obs0) is for acceleration finally. Because of the more complicated observation inputs, the hidden state of our Social-GAN is also extended. Therefore we complicated our model with actual purpose.
 
-The evaluation script and its help menu: ``python -m evaluator.trajnet_evaluator --help``
+For the model training and parameters tuning, due to our inherently complex neuron network structure, we choose lower dimensions for each layer. During the training, initial learning rate 0.0001 works well for our case, which achieves meaningful dropping in loss, FDE and so on. However, because of the time limitation, we are just able to train 6 epochs for a whole day so can not see a better result before the deadline. We showed below our loss evolution with the epochs :
 
-**Run Example**
-
-.. code-block::
-
-   ## TrajNet++ evaluator (saves model predictions. Useful for submission to TrajNet++ benchmark)
-   python -m evaluator.trajnet_evaluator --output OUTPUT_BLOCK/trajdata/lstm_directional_None.pkl --path <path_to_test_file>
-   
-   ## Fast Evaluator (does not save model predictions)
-   python -m evaluator.fast_evaluator --output OUTPUT_BLOCK/trajdata/lstm_directional_None.pkl --path <path_to_test_file>
-
-More details regarding TrajNet++ evaluator are provided `here <https://github.com/vita-epfl/trajnetplusplusbaselines/blob/master/evaluator/README.rst>`_
-
-Evaluation on datasplits is based on the following `categorization <https://github.com/vita-epfl/trajnetplusplusbaselines/blob/master/docs/train/Categorize.png>`_
-
+.. figure:: docs/synth_data_results/sgan_motionattentionmlp_None.pkl.log.seq-loss.png
 
 Results
 -------
@@ -114,29 +102,10 @@ https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/su
 milestone 2 link (multi): 
 https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/submissions/138597
 
-Interpreting Forecasting Models
-===============================
-
-+-------------------------------------------------------------------------+
-|  .. figure:: docs/train/LRP.gif                                         |
-|                                                                         |
-|     Visualizations of the decision-making of social interaction modules |
-|     using layer-wise relevance propagation (LRP). The darker the yellow |
-|     circles, the more is the weight provided by the primary pedestrian  |
-|     (blue) to the corresponding neighbour (yellow).                     |
-+-------------------------------------------------------------------------+
-
-Code implementation for explaining trajectory forecasting models using LRP can be found `here <https://github.com/vita-epfl/trajnetplusplusbaselines/tree/LRP>`_
-
-Benchmarking Models
-===================
-
-We host the `Trajnet++ Challenge <https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge>`_ on AICrowd allowing researchers to objectively evaluate and benchmark trajectory forecasting models on interaction-centric data. We rely on the spirit of crowdsourcing, and encourage researchers to submit their sequences to our benchmark, so the quality of trajectory forecasting models can keep increasing in tackling more challenging scenarios.
 
 Citation
 ========
 
-If you find this code useful in your research then please cite
 
 .. code-block::
 
