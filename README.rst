@@ -52,7 +52,7 @@ As for the implementation, we include three continuous frame observations (obs0,
 
 For the model training and parameters tuning, due to our inherently complex neuron network structure, we choose lower dimensions for each layer. During the training, initial learning rate 0.0001 works well for our case, which achieves meaningful dropping in loss, FDE and so on. However, because of the time limitation, we are just able to train 6 epochs for a whole day so can not see a better result before the deadline. We showed below our loss evolution with the epochs :
 
-.. figure:: docs/synth_data_results/sgan_motionattentionmlp_None.pkl.log.seq-loss.png
+.. figure:: docs/real_data_results/sgan_motionattentionmlp_None.pkl.log.seq-loss.png
 
 Results
 -------
