@@ -106,6 +106,7 @@ https://www.aicrowd.com/challenges/trajnet-a-trajectory-forecasting-challenge/su
 Citation
 ========
 
+The used Trajnet++ Baseline code was developed by
 
 .. code-block::
 
