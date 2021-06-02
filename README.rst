@@ -30,7 +30,7 @@ Training Models
 LSTM
 ----
 
-For LSTM, we implemented social loss which consist of adding 
+Situations where collisions occur are too rare during the training so that the model correctly handles these situations in real scenarios. Thus, the idea is to give additional information to the model during training to avoid collisions. Therefore, we combined the initial LSTM trajectory predictor with the NCE social loss. The NCE social loss tries to maximize the similarity between the query embedded position and a positive key and tries to minimize the similarity between the embedded query position and several negative keys. In that case, the negative keys correspond to locations which correspond to collisions or uncomfortable situations (personal space too small) for the primary pedestrian. Uncomfortable situation positions are sampled around the position of the neighboring pedestrians from the current time step to a given horizon. The positive key corresponds to the embedded position of the primary pedestrian at the given horizon. Intuitively, the NCE loss pushes the primary pedestrian position far from the negative keys and pulls it to the positive key. 
 
 
 SGAN
