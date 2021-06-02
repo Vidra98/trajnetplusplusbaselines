@@ -50,7 +50,7 @@ Secondly, inspired by neuron science, the attention mechanism is introduced to d
 
 As for the implementation, we include three continuous frame observations (obs0, obs1, obs2) to fully learn the motion. For example, obs2 is used to describe the position, (obs2 - obs1) is for velocity, and (obs2 - obs1) - (obs1 - obs0) is for acceleration finally. Because of the more complicated observation inputs, the hidden state of our Social-GAN is also extended. Therefore we complicated our model with actual purpose.
 
-For the model training and parameters tuning, due to our inherently complex neuron network structure, we choose lower dimensions for each layer. During the training, initial learning rate 0.0001 works well for our case, which achieves meaningful dropping in loss, FDE and so on. However, because of the time limitation, we are just able to train 6 epochs for a whole day so can not see a better result before the deadline. We showed below our loss evolution with the epochs :
+For the model training and parameters tuning, due to our inherently complex neuron network structure, we choose lower dimensions for each layer. During the training, initial learning rate 0.0001 works well for our case, which achieves meaningful dropping in loss, FDE and so on. However, because of the time limitation, we are just able to train 6 epochs on synth data for a whole day so can not see a better result before the deadline. We showed below our loss evolution with the epochs :
 
 .. figure:: docs/real_data_results/sgan_motionattentionmlp_None.pkl.log.seq-loss.png
 
